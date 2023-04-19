@@ -38,4 +38,13 @@ public class PacienteController {
         return ResponseEntity.ok(page);
     }
 
+    @PutMapping("/atualiza")
+    @Transactional
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizacaoPaciente dados) {
+        Paciente paciente = repository.getReferenceById(dados.id());
+        paciente.atualizarInformacoes(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
+    }
+
 }
