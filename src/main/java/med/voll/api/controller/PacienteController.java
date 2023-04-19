@@ -47,4 +47,13 @@ public class PacienteController {
         return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
     }
 
+    @DeleteMapping("/deleta/{id}")
+    @Transactional
+    public ResponseEntity desativar(@PathVariable Long id) {
+        Paciente paciente = repository.getReferenceById(id);
+        paciente.desativar();
+
+        return ResponseEntity.noContent().build();
+    }
+
 }
